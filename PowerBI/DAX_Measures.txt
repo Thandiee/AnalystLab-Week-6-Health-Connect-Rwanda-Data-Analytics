@@ -1,0 +1,18 @@
+-- DAX STARTER MEASURES — adapt names/relationships to the actual data model.
+Total Patients = DISTINCTCOUNT(Patients[patient_id])
+Total Appointments = DISTINCTCOUNT(Appointments[appointment_id])
+Total Facilities = DISTINCTCOUNT(Health_Facilities[facility_id])
+Total Doctors = DISTINCTCOUNT(Doctors[doctor_id])
+Total Revenue = SUM(Revenue_Summary[revenue_amount])
+Average Satisfaction = AVERAGE(Patient_Feedback[rating])
+Total Diagnoses = DISTINCTCOUNT(Diagnoses[diagnosis_id])
+Total Lab Tests = DISTINCTCOUNT(Laboratory_Tests[test_id])
+Total Prescriptions = DISTINCTCOUNT(Prescriptions[prescription_id])
+Total Admissions = DISTINCTCOUNT(Admissions[admission_id])
+Total Beds = COUNTROWS(Beds)
+Available Beds = CALCULATE(COUNTROWS(Beds), Beds[status] = "Available")
+Bed Availability Rate = DIVIDE([Available Beds], [Total Beds])
+Approved Claims = CALCULATE(COUNTROWS(Insurance_Claims), Insurance_Claims[status] = "Approved")
+Adjudicated Claims = CALCULATE(COUNTROWS(Insurance_Claims), Insurance_Claims[status] IN {"Approved","Rejected"})
+Claim Approval Rate = DIVIDE([Approved Claims], [Adjudicated Claims])
+-- Add a marked Date table for time intelligence and relate it to a verified date field.
